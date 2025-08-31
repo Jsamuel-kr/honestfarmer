@@ -6,6 +6,17 @@
   <title>바른청년먹거리 | 영월 배추 · 절임배추 예약구매</title>
   <meta name="description" content="강원도 영월에서 재배한 신선한 배추와 꼼꼼한 공정으로 만든 절임배추. 김장 하루 전날 수령, 다음날 편하게 김장하세요." />
   <meta name="format-detection" content="telephone=no" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph / Twitter (URL/이미지는 실제 배포 URL로 교체하세요) -->
+  <!-- <link rel="canonical" href="https://example.com/jolim" /> -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="바른청년먹거리 – 영월 절임배추 예약" />
+  <meta property="og:description" content="모종부터 재배·세척·절임·포장까지 직접 관리. 김장 하루 전날 수령 → 다음날 김장!" />
+  <!-- <meta property="og:image" content="https://example.com/og.jpg" /> -->
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <style>
     :root{
@@ -19,24 +30,44 @@
       --bar-h:72px;
       --radius:16px;
     }
-
     *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Noto Sans KR,sans-serif;color:var(--ink);background:#fff;line-height:1.6;
-      padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Noto Sans KR,sans-serif;
+      color:var(--ink);
+      background:#fff;
+      line-height:1.6;
+      /* 하단 고정바 + 안전영역 만큼 바디에 여유 패딩 */
+      padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom, 0px));
+    }
     img{max-width:100%;display:block}
     a{text-decoration:none;color:inherit}
+    .muted{color:var(--muted)}
+
+    /* 스킵 링크 */
+    .skip-link{
+      position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+    }
+    .skip-link:focus{position:fixed;left:16px;top:16px;width:auto;height:auto;background:#111;color:#fff;padding:.6rem .8rem;border-radius:8px;z-index:1000}
+
+    /* 앵커 이동 시 헤더에 가리지 않도록 */
+    [id]{scroll-margin-top:calc(var(--bar-h) + 64px)}
 
     .container{width:min(1120px,92%);margin-inline:auto}
 
-    header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--border);z-index:50}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
+    header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--border);z-index:900}
+    nav.nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
     .brand{display:flex;gap:.75rem;align-items:center}
     .brand img{width:40px;height:40px;border-radius:50%;box-shadow:0 2px 10px var(--ring)}
     .brand .title{font-weight:800;letter-spacing:.2px;color:var(--dark)}
     .cta-group{display:flex;gap:.5rem;flex-wrap:wrap}
-    .btn{appearance:none;border:0;border-radius:999px;padding:.7rem 1.1rem;font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
+    .btn{
+      appearance:none;border:0;border-radius:999px;padding:.7rem 1.1rem;
+      font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.2s;
+      display:inline-flex;align-items:center;gap:.5rem;text-decoration:none
+    }
     .btn-primary{background:var(--cta);color:#fff}
     .btn-primary:hover{filter:brightness(.95)}
     .btn-outline{background:#fff;color:var(--dark);border:1px solid var(--border)}
@@ -78,8 +109,12 @@
     .banner{background:linear-gradient(90deg,#f9fffa,#fff);border:1px solid #d1fae5;border-radius:14px;padding:14px 18px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 28px rgba(167,243,208,.25)}
     .banner strong{color:#065f46}
 
-    footer{background:#0f172a;color:#e2e8f0;padding:44px 0;/* 하단 고정바에 가리지 않도록 여유 공간 */
-      padding-bottom:calc(44px + var(--bar-h) + 16px);margin-top:44px}
+    footer{
+      background:#0f172a;color:#e2e8f0;padding:44px 0;
+      /* 하단 고정바에 가리지 않도록 여유 공간 */
+      padding-bottom:calc(44px + var(--bar-h) + 16px);
+      margin-top:44px
+    }
     .foot{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}
     .foot small{color:#94a3b8}
     .footer-title{font-size:1.1rem;font-weight:800}
@@ -87,9 +122,20 @@
     .footer-list a{color:#c7d2fe;text-decoration:none}
     .footer-list a:hover{text-decoration:underline}
 
-    .bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);box-shadow:0 -4px 12px rgba(0,0,0,.08);z-index:70}
-    .bottom-inner{display:flex;gap:8px;align-items:center;justify-content:space-between;width:min(1120px,92%);margin:0 auto;padding:12px 0;min-height:var(--bar-h)}
-    .bottom-inner a{flex:1;text-align:center;border-radius:10px;padding:.9rem .6rem;font-weight:800;color:#fff;white-space:nowrap}
+    .bottom-bar{
+      position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);
+      box-shadow:0 -4px 12px rgba(0,0,0,.08);z-index:950;
+      /* iOS 안전영역 패딩 */
+      padding-bottom:max(0px, env(safe-area-inset-bottom, 0px));
+    }
+    .bottom-inner{
+      display:flex;gap:8px;align-items:center;justify-content:space-between;
+      width:min(1120px,92%);margin:0 auto;padding:12px 0;min-height:var(--bar-h)
+    }
+    .bottom-inner a{
+      flex:1;text-align:center;border-radius:10px;padding:.9rem .6rem;
+      font-weight:800;color:#fff;white-space:nowrap;display:inline-flex;justify-content:center;align-items:center
+    }
     .btn-coupang{background:#ff6f00}
     .btn-naver{background:#03c75a}
     .btn-call{background:var(--dark)}
@@ -102,141 +148,187 @@
       .foot{grid-template-columns:1fr}
     }
   </style>
+
+  <!-- FAQ 구조화 데이터 (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "20kg 한 박스에 몇 포기인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "계절·작황에 따라 다르지만 보통 7~9포기 정도로 보시면 됩니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "세척 후 다시 씻어야 하나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "다시 세척하지 마세요. 수돗물로 재세척하면 배추가 빨리 무를 수 있습니다. 수령 후 바로 절이거나 드시는 걸 권장합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "수령 날짜는 언제가 좋을까요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "배송받는 날을 김장 하루 전날로 추천드립니다. 성수기에는 택배 물량 증가·기상 변수로 늦어질 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "교환/환불은 가능한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "신선식품 특성상 단순 변심 교환·환불은 어렵습니다. 파손·훼손 등 문제가 있을 경우 24시간 내 고객센터로 연락 바랍니다."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
   <!-- Header -->
   <header>
-    <div class="container nav">
+    <nav class="container nav" aria-label="주요">
       <a class="brand" href="#top" aria-label="홈으로">
-        <img src="logo.png" alt="바른청년먹거리 로고" />
+        <img src="logo.png" alt="바른청년먹거리 로고" width="40" height="40" decoding="async" loading="eager"/>
         <div class="title">바른청년먹거리</div>
       </a>
-      <div class="cta-group">
-        <a class="btn btn-primary" href="#faq">자주 묻는 질문</a>
-        <a class="btn btn-outline" href="#steps-title">주문 과정</a>
-        <a class="btn btn-call" href="tel:010-8343-8997">전화주문 010-8343-8997</a>
+      <div class="cta-group" role="group" aria-label="상단 바로가기">
+        <a class="btn btn-primary" href="#faq" aria-label="자주 묻는 질문으로 이동">자주 묻는 질문</a>
+        <a class="btn btn-outline" href="#steps-title" aria-label="주문 과정으로 이동">주문 과정</a>
+        <a class="btn btn-call" href="tel:010-8343-8997" aria-label="전화 주문, 010-8343-8997">전화주문 010-8343-8997</a>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" id="top">
-    <div class="container hero-inner">
-      <div>
-        <span class="badge">강원도 영월 직배송 · 절임배추 예약</span>
-        <h1>신선한 재료로 완성하는 <br><span style="color:#374151">깔끔한 절임배추</span></h1>
-        <p class="sub">모종부터 재배·세척·절임·포장까지 직접 관리합니다. <b>김장 하루 전날 수령</b>하시고, <b>다음날 바로 김장</b>하세요.</p>
-      </div>
-      <div>
-        <img class="van" src="man.png" alt="바른청년먹거리 대표 사진"/>
-      </div>
-    </div>
-  </section>
-
-  <!-- Steps -->
-  <section class="section container" aria-labelledby="steps-title">
-    <h2 id="steps-title">주문 과정 (아주 간단해요)</h2>
-    <div class="steps">
-      <article class="step">
-        <strong>STEP 1</strong>
-        <h3>주문</h3>
-        <p>쿠팡 · 네이버 스토어 또는 <a href="tel:010-8343-8997">전화 주문</a>으로 예약합니다.</p>
-      </article>
-      <article class="step">
-        <strong>STEP 2</strong>
-        <h3>예약 날짜 선택</h3>
-        <p>김장 <b>하루 전날 수령</b>으로 선택해 주세요. (날씨·택배 상황 고려)</p>
-      </article>
-      <article class="step">
-        <strong>STEP 3</strong>
-        <h3>수령 후 다음날 김장</h3>
-        <p>받으신 배추는 냉장 보관하시고, 다음날 편하게 김장하시면 됩니다.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Quality cards -->
-  <section class="section container" aria-labelledby="quality-title">
-    <h2 id="quality-title">바른청년먹거리가 특별한 이유</h2>
-    <div class="cards">
-      <article class="card">
-        <img class="thumb" src="sample1.jpg" alt="영월 밭에서 자라는 배추" />
-        <div class="body">
-          <span class="chip">원산지: 강원 영월</span>
-          <h3>모종부터 재배까지 직접 관리</h3>
-          <p class="muted">계약 재배로 품질 편차를 줄이고, 속이 단단한 배추만 선별합니다.</p>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div>
+          <span class="badge">강원도 영월 직배송 · 절임배추 예약</span>
+          <h1 id="hero-title">신선한 재료로 완성하는 <br><span style="color:#374151">깔끔한 절임배추</span></h1>
+          <p class="sub">모종부터 재배·세척·절임·포장까지 직접 관리합니다. <b>김장 하루 전날 수령</b>하시고, <b>다음날 바로 김장</b>하세요.</p>
         </div>
-      </article>
-      <article class="card">
-        <img class="thumb" src="sample2.jpg" alt="국산 천일염" />
-        <div class="body">
-          <span class="chip">국산 천일염</span>
-          <h3>깔끔한 단맛, 깊은 감칠맛</h3>
-          <p>미네랄이 풍부한 천일염으로 절여 김치의 기본 맛을 살렸습니다.</p>
+        <div>
+          <img class="van" src="man.png" alt="대표가 영월 농장에서 절임배추를 설명하는 모습" decoding="async" width="720" height="480" />
         </div>
-      </article>
-      <article class="card">
-        <img class="thumb" src="sample3.jpg" alt="버블세척 공정" />
-        <div class="body">
-          <span class="chip">버블세척 · 수작업</span>
-          <h3>안심 위생 공정</h3>
-          <p>깨끗하게 세척하고, 이중포장으로 배송 중 파손을 최소화합니다.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Gallery -->
-  <section class="section container" aria-labelledby="gal-title">
-    <h2 id="gal-title">현장 사진</h2>
-    <div class="gallery">
-      <img src="sample4.jpg" alt="속이 꽉 찬 배추 단면" />
-      <img src="sample5.jpg" alt="절임 과정" />
-      <img src="sample6.jpg" alt="포장된 절임배추" />
-      <img src="sample7.jpg" alt="농장 전경" />
-    </div>
-  </section>
-
-  <!-- Banner -->
-  <section class="container">
-    <div class="banner" role="note">
-      <div>📅</div>
-      <div>
-        <strong>김장 하루 전날 수령 권장!</strong><br/>
-        택배 상황·기온에 따라 변수가 있어, 전날 수령 후 냉장 보관 → 다음날 김장하시면 가장 안전합니다.
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section class="section" id="faq" aria-labelledby="faq-title">
-    <div class="container faq">
-      <h2 id="faq-title">자주 묻는 질문</h2>
-      <details>
-        <summary>20kg 한 박스에 몇 포기인가요?</summary>
-        <p>계절·작황에 따라 다르지만 보통 <b>7~9포기</b> 정도로 보시면 됩니다.</p>
-      </details>
-      <details>
-        <summary>세척 후 다시 씻어야 하나요?</summary>
-        <p><b>다시 세척하지 마세요.</b> 수돗물로 재세척하면 배추가 빨리 무를 수 있습니다. 수령 후 바로 절이거나 드시는 걸 권장합니다.</p>
-      </details>
-      <details>
-        <summary>수령 날짜는 언제가 좋을까요?</summary>
-        <p>배송받는 날을 <b>김장 하루 전날</b>로 추천드립니다. 성수기에는 택배 물량 증가·기상 변수로 늦어질 수 있습니다.</p>
-      </details>
-      <details>
-        <summary>교환/환불은 가능한가요?</summary>
-        <p>신선식품 특성상 단순 변심 교환·환불은 어렵습니다. 파손·훼손 등 문제가 있을 경우 <b>24시간 내</b> 고객센터로 연락 바랍니다.</p>
-      </details>
-    </div>
-  </section>
+    <!-- Steps -->
+    <section class="section container" aria-labelledby="steps-title">
+      <h2 id="steps-title">주문 과정 (아주 간단해요)</h2>
+      <div class="steps">
+        <article class="step">
+          <strong>STEP 1</strong>
+          <h3>주문</h3>
+          <p>쿠팡 · 네이버 스토어 또는 <a href="tel:010-8343-8997">전화 주문</a>으로 예약합니다.</p>
+        </article>
+        <article class="step">
+          <strong>STEP 2</strong>
+          <h3>예약 날짜 선택</h3>
+          <p>김장 <b>하루 전날 수령</b>으로 선택해 주세요. (날씨·택배 상황 고려)</p>
+        </article>
+        <article class="step">
+          <strong>STEP 3</strong>
+          <h3>수령 후 다음날 김장</h3>
+          <p>받으신 배추는 냉장 보관하시고, 다음날 편하게 김장하시면 됩니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Quality cards -->
+    <section class="section container" aria-labelledby="quality-title">
+      <h2 id="quality-title">바른청년먹거리가 특별한 이유</h2>
+      <div class="cards">
+        <article class="card">
+          <img class="thumb" src="sample1.jpg" alt="영월 밭에서 자라는 배추" loading="lazy" decoding="async" />
+          <div class="body">
+            <span class="chip">원산지: 강원 영월</span>
+            <h3>모종부터 재배까지 직접 관리</h3>
+            <p class="muted">계약 재배로 품질 편차를 줄이고, 속이 단단한 배추만 선별합니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="thumb" src="sample2.jpg" alt="국산 천일염" loading="lazy" decoding="async" />
+          <div class="body">
+            <span class="chip">국산 천일염</span>
+            <h3>깔끔한 단맛, 깊은 감칠맛</h3>
+            <p class="muted">미네랄이 풍부한 천일염으로 절여 김치의 기본 맛을 살렸습니다.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="thumb" src="sample3.jpg" alt="버블세척 공정" loading="lazy" decoding="async" />
+          <div class="body">
+            <span class="chip">버블세척 · 수작업</span>
+            <h3>안심 위생 공정</h3>
+            <p class="muted">깨끗하게 세척하고, 이중포장으로 배송 중 파손을 최소화합니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section container" aria-labelledby="gal-title">
+      <h2 id="gal-title">현장 사진</h2>
+      <div class="gallery">
+        <img src="sample4.jpg" alt="속이 꽉 찬 배추 단면" loading="lazy" decoding="async" />
+        <img src="sample5.jpg" alt="절임 과정" loading="lazy" decoding="async" />
+        <img src="sample6.jpg" alt="포장된 절임배추" loading="lazy" decoding="async" />
+        <img src="sample7.jpg" alt="농장 전경" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <!-- Banner -->
+    <section class="container" aria-label="안내">
+      <div class="banner" role="note">
+        <div aria-hidden="true">📅</div>
+        <div>
+          <strong>김장 하루 전날 수령 권장!</strong><br/>
+          택배 상황·기온에 따라 변수가 있어, 전날 수령 후 냉장 보관 → 다음날 김장하시면 가장 안전합니다.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq">
+        <h2 id="faq-title">자주 묻는 질문</h2>
+        <details>
+          <summary>20kg 한 박스에 몇 포기인가요?</summary>
+          <p>계절·작황에 따라 다르지만 보통 <b>7~9포기</b> 정도로 보시면 됩니다.</p>
+        </details>
+        <details>
+          <summary>세척 후 다시 씻어야 하나요?</summary>
+          <p><b>다시 세척하지 마세요.</b> 수돗물로 재세척하면 배추가 빨리 무를 수 있습니다. 수령 후 바로 절이거나 드시는 걸 권장합니다.</p>
+        </details>
+        <details>
+          <summary>수령 날짜는 언제가 좋을까요?</summary>
+          <p>배송받는 날을 <b>김장 하루 전날</b>로 추천드립니다. 성수기에는 택배 물량 증가·기상 변수로 늦어질 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>교환/환불은 가능한가요?</summary>
+          <p>신선식품 특성상 단순 변심 교환·환불은 어렵습니다. 파손·훼손 등 문제가 있을 경우 <b>24시간 내</b> 고객센터로 연락 바랍니다.</p>
+        </details>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <div class="container foot">
       <div>
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
-          <img src="logo.png" alt="바른청년먹거리 로고" style="width:40px;height:40px;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.25)"/>
+          <img src="logo.png" alt="바른청년먹거리 로고" width="40" height="40" style="border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.25)"/>
           <div class="footer-title">바른청년먹거리</div>
         </div>
         <small>© 2025 honestfarmer. All rights reserved.</small>
@@ -250,16 +342,17 @@
       </div>
     </div>
   </footer>
-  
+
   <!-- 바에 가리지 않도록 보정용 스페이서 (안전빵) -->
   <div aria-hidden="true" style="height:16px"></div>
 
-   <!-- 하단 고정 버튼 바 -->
-  <div class="bottom-bar">
+  <!-- 하단 고정 버튼 바 -->
+  <div class="bottom-bar" role="region" aria-label="빠른 구매/문의">
     <div class="bottom-inner">
-      <a href="#" class="btn-coupang">쿠팡 구매하러가기</a>
-      <a href="#" class="btn-naver">네이버 구매하러가기</a>
-      <a href="tel:010-8343-8997" class="btn-call">전화 주문하기</a>
+      <!-- 실제 판매 URL로 교체하세요 -->
+      <a href="https://www.coupang.com/" target="_blank" rel="noopener" class="btn-coupang" aria-label="쿠팡에서 구매하기 새 창">쿠팡 구매하러가기</a>
+      <a href="https://smartstore.naver.com/" target="_blank" rel="noopener" class="btn-naver" aria-label="네이버 스토어에서 구매하기 새 창">네이버 구매하러가기</a>
+      <a href="tel:010-8343-8997" class="btn-call" aria-label="전화 주문하기, 010-8343-8997">전화 주문하기</a>
     </div>
   </div>
 </body>
