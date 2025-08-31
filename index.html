@@ -151,31 +151,41 @@
     .btn-naver{background:#03c75a}
     .btn-call{background:var(--dark)}
 
-    /* ===== 모바일 전용 수정 ===== */
-    @media (max-width:480px){
-      /* 상호명 한 줄 고정 */
-      .brand .title{ white-space:nowrap; }
+/* ===== 모바일 전용 수정 ===== */
+@media (max-width:480px){
+  /* 상호명 한 줄 고정 */
+  .brand .title{ white-space:nowrap; }
 
-      /* 상단: 모바일은 전화주문만 표시 */
-      .cta-group a:not(.btn-call){ display:none !important; }
+  /* 상단: 모바일은 전화주문만 표시 */
+  .cta-group a:not(.btn-call){ display:none !important; }
 
-      /* 헤더 살짝 얇게 */
-      nav.nav{ padding:.6rem 0; }
+  /* 헤더 살짝 얇게 */
+  nav.nav{ padding:.6rem 0; }
 
-      .cta-group{ flex:1; min-width:0; }
-      .cta-group .btn-call{
-        flex:1;
-        height:40px;          /* 필요시 36px로 더 줄여도 OK */
-        padding:0 .6rem;      /* 세로 패딩 0 → 높이 고정 */
-        font-size:.88rem;
-        line-height:1;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        border-radius:10px;
-        text-align:center;
-        white-space:nowrap;
-      }
+  /* 핵심: 버튼 폭을 '내용만큼만'으로 */
+  .cta-group{
+    display:inline-flex;   /* grid/flex 대신 inline-flex -> 내용폭만 차지 */
+    gap:6px;
+    min-width:0;
+    /* 원하면 오른쪽 정렬: */
+    /* margin-left:auto; */
+  }
+  .cta-group .btn-call{
+    flex:0 0 auto;         /* << 기존 flex:1 제거! 내용폭만 */
+    height:40px;           /* 필요시 36px로 */
+    padding:0 .6rem;       /* 세로 0 -> 높이 고정 */
+    font-size:.88rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    text-align:center;
+    white-space:nowrap;
+    width:auto;            /* 안전빵 */
+  }
+}
+
 
       /* 카드 텍스트 살짝 축소 */
       .cards{ gap:10px; }
@@ -383,3 +393,4 @@
   </div>
 </body>
 </html>
+
