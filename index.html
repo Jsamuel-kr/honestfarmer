@@ -8,7 +8,10 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#ffffff" />
-
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png">
+  
   <!-- Open Graph / Twitter (배포 시 URL/이미지 채우세요) -->
   <!-- <link rel="canonical" href="https://example.com/jolim" /> -->
   <meta property="og:type" content="website" />
@@ -146,41 +149,62 @@
     .btn-naver{background:#03c75a}
     .btn-call{background:var(--dark)}
 
-    /* ===== 모바일 전용 수정 ===== */
-    @media (max-width:480px){
-      /* 상호명 한 줄 고정(보강) */
-      .brand .title{white-space:nowrap}
+/* ===== 모바일 전용 수정 ===== */
+@media (max-width:480px){
+  /* 상호명 한 줄 고정 */
+  .brand .title{ white-space:nowrap; }
 
-      /* 모바일에서는 전화주문만 보이게 */
-      .cta-group a:not(.btn-call){display:none !important}
-      .cta-group{flex:1}
-      .cta-group .btn-call{flex:1;font-size:.95rem;padding:.6rem .8rem}
+  /* 상단: 모바일에서는 전화주문만 보이게 */
+  .cta-group a:not(.btn-call){ display:none !important; }
 
-      /* 카드 텍스트 살짝 축소 */
-      .cards{gap:10px}
-      .card .body{padding:12px}
-      .card h3{font-size:.95rem}
-      .chip{font-size:.72rem}
+  /* 헤더 자체도 살짝 얇게 */
+  nav.nav{ padding:.6rem 0; }
 
-      /* 하단 버튼 잘림 방지 */
-      :root{ --bar-h:64px; }
-      .bottom-inner{ gap:6px; padding:10px 0; }
-      .bottom-inner a{ padding:.7rem .4rem; font-size:.92rem; min-width:0; letter-spacing:0; }
-    }
+  .cta-group{
+    flex:1;
+    min-width:0; /* 혹시 모를 넘침 방지 */
+  }
 
-    /* 초소형 기기 보완 */
-    @media (max-width:360px){
-      .bottom-inner a{font-size:.86rem;padding:.6rem .35rem}
-    }
+  /* 전화주문 버튼 크기 줄이고, 텍스트 완전 중앙정렬 */
+  .cta-group .btn-call{
+    flex:1;                 /* 가로 꽉 차게 */
+    height:40px;            /* 버튼 높이 고정 (필요시 36px로 더 줄여도 OK) */
+    padding:0 .6rem;        /* 세로 패딩 0 → 높이 확정 */
+    font-size:.88rem;       /* 글자 크기 약간 축소 */
+    line-height:1;
+    display:flex;           /* 중앙정렬 보장 */
+    align-items:center;     /* 세로 가운데 */
+    justify-content:center; /* 가로 가운데 */
+    border-radius:10px;
+    text-align:center;
+    white-space:nowrap;
+  }
 
-    /* 기타 반응형 */
-    @media (max-width:960px){
-      .hero-inner{grid-template-columns:1fr}
-      .steps{grid-template-columns:1fr}
-      .gallery{grid-template-columns:1fr 1fr}
-      .foot{grid-template-columns:1fr}
-    }
-  </style>
+  /* 카드 텍스트 살짝 축소 */
+  .cards{ gap:10px; }
+  .card .body{ padding:12px; }
+  .card h3{ font-size:.95rem; }
+  .chip{ font-size:.72rem; }
+
+  /* 하단 버튼 잘림 방지 */
+  :root{ --bar-h:64px; }
+  .bottom-inner{ gap:6px; padding:10px 0; }
+  .bottom-inner a{ padding:.7rem .4rem; font-size:.92rem; min-width:0; letter-spacing:0; }
+}
+
+/* 초소형 기기 보완 (선택): 더 작게 보이길 원하면 활성화 */
+@media (max-width:360px){
+  .cta-group .btn-call{ height:36px; font-size:.84rem; }
+  .bottom-inner a{ font-size:.86rem; padding:.6rem .35rem; }
+}
+
+/* 기타 반응형 */
+@media (max-width:960px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .steps{ grid-template-columns:1fr; }
+  .gallery{ grid-template-columns:1fr 1fr; }
+  .foot{ grid-template-columns:1fr; }
+}
 
   <!-- FAQ 구조화 데이터 (SEO) -->
   <script type="application/ld+json">
@@ -362,3 +386,4 @@
   </div>
 </body>
 </html>
+
