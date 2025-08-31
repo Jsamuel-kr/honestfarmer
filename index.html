@@ -8,11 +8,13 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#ffffff" />
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-<link rel="shortcut icon" href="favicon.png">
-  
-  <!-- Open Graph / Twitter (배포 시 URL/이미지 채우세요) -->
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <!-- Open Graph / Twitter -->
   <!-- <link rel="canonical" href="https://example.com/jolim" /> -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="바른청년먹거리 – 영월 절임배추 예약" />
@@ -149,62 +151,58 @@
     .btn-naver{background:#03c75a}
     .btn-call{background:var(--dark)}
 
-/* ===== 모바일 전용 수정 ===== */
-@media (max-width:480px){
-  /* 상호명 한 줄 고정 */
-  .brand .title{ white-space:nowrap; }
+    /* ===== 모바일 전용 수정 ===== */
+    @media (max-width:480px){
+      /* 상호명 한 줄 고정 */
+      .brand .title{ white-space:nowrap; }
 
-  /* 상단: 모바일에서는 전화주문만 보이게 */
-  .cta-group a:not(.btn-call){ display:none !important; }
+      /* 상단: 모바일은 전화주문만 표시 */
+      .cta-group a:not(.btn-call){ display:none !important; }
 
-  /* 헤더 자체도 살짝 얇게 */
-  nav.nav{ padding:.6rem 0; }
+      /* 헤더 살짝 얇게 */
+      nav.nav{ padding:.6rem 0; }
 
-  .cta-group{
-    flex:1;
-    min-width:0; /* 혹시 모를 넘침 방지 */
-  }
+      .cta-group{ flex:1; min-width:0; }
+      .cta-group .btn-call{
+        flex:1;
+        height:40px;          /* 필요시 36px로 더 줄여도 OK */
+        padding:0 .6rem;      /* 세로 패딩 0 → 높이 고정 */
+        font-size:.88rem;
+        line-height:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:10px;
+        text-align:center;
+        white-space:nowrap;
+      }
 
-  /* 전화주문 버튼 크기 줄이고, 텍스트 완전 중앙정렬 */
-  .cta-group .btn-call{
-    flex:1;                 /* 가로 꽉 차게 */
-    height:40px;            /* 버튼 높이 고정 (필요시 36px로 더 줄여도 OK) */
-    padding:0 .6rem;        /* 세로 패딩 0 → 높이 확정 */
-    font-size:.88rem;       /* 글자 크기 약간 축소 */
-    line-height:1;
-    display:flex;           /* 중앙정렬 보장 */
-    align-items:center;     /* 세로 가운데 */
-    justify-content:center; /* 가로 가운데 */
-    border-radius:10px;
-    text-align:center;
-    white-space:nowrap;
-  }
+      /* 카드 텍스트 살짝 축소 */
+      .cards{ gap:10px; }
+      .card .body{ padding:12px; }
+      .card h3{ font-size:.95rem; }
+      .chip{ font-size:.72rem; }
 
-  /* 카드 텍스트 살짝 축소 */
-  .cards{ gap:10px; }
-  .card .body{ padding:12px; }
-  .card h3{ font-size:.95rem; }
-  .chip{ font-size:.72rem; }
+      /* 하단 버튼 잘림 방지 */
+      :root{ --bar-h:64px; }
+      .bottom-inner{ gap:6px; padding:10px 0; }
+      .bottom-inner a{ padding:.7rem .4rem; font-size:.92rem; min-width:0; letter-spacing:0; }
+    }
 
-  /* 하단 버튼 잘림 방지 */
-  :root{ --bar-h:64px; }
-  .bottom-inner{ gap:6px; padding:10px 0; }
-  .bottom-inner a{ padding:.7rem .4rem; font-size:.92rem; min-width:0; letter-spacing:0; }
-}
+    /* 초소형 기기 보완 */
+    @media (max-width:360px){
+      .cta-group .btn-call{ height:36px; font-size:.84rem; }
+      .bottom-inner a{ font-size:.86rem; padding:.6rem .35rem; }
+    }
 
-/* 초소형 기기 보완 (선택): 더 작게 보이길 원하면 활성화 */
-@media (max-width:360px){
-  .cta-group .btn-call{ height:36px; font-size:.84rem; }
-  .bottom-inner a{ font-size:.86rem; padding:.6rem .35rem; }
-}
-
-/* 기타 반응형 */
-@media (max-width:960px){
-  .hero-inner{ grid-template-columns:1fr; }
-  .steps{ grid-template-columns:1fr; }
-  .gallery{ grid-template-columns:1fr 1fr; }
-  .foot{ grid-template-columns:1fr; }
-}
+    /* 기타 반응형 */
+    @media (max-width:960px){
+      .hero-inner{ grid-template-columns:1fr; }
+      .steps{ grid-template-columns:1fr; }
+      .gallery{ grid-template-columns:1fr 1fr; }
+      .foot{ grid-template-columns:1fr; }
+    }
+  </style>
 
   <!-- FAQ 구조화 데이터 (SEO) -->
   <script type="application/ld+json">
@@ -378,7 +376,6 @@
   <!-- 하단 고정 버튼 바 -->
   <div class="bottom-bar" role="region" aria-label="빠른 구매/문의">
     <div class="bottom-inner">
-      <!-- 실제 판매 URL로 교체하세요 -->
       <a href="https://www.coupang.com/" target="_blank" rel="noopener" class="btn-coupang" aria-label="쿠팡에서 구매하기 새 창">쿠팡 구매</a>
       <a href="https://smartstore.naver.com/" target="_blank" rel="noopener" class="btn-naver" aria-label="네이버 스토어에서 구매하기 새 창">네이버 구매</a>
       <a href="tel:010-8343-8997" class="btn-call" aria-label="전화 주문하기, 010-8343-8997">전화</a>
@@ -386,4 +383,3 @@
   </div>
 </body>
 </html>
-
