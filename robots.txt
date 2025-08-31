@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jsamuel-kr.github.io/honestfarmer/sitemap.xml
